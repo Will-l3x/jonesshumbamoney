@@ -3,10 +3,10 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { FaUser } from 'react-icons/fa'
-import { registerReciever, reset } from '../features/Recipients/recipientsSlice'
+import { updateReciever, reset } from '../features/Recipients/recipientsSlice'
 import Spinner from '../Components/Spinner'
 
-function RegisterReciever() {
+function UpdateReciever() {
   const [formData, setFormData] = useState({
     fullname:'',
     city:'',
@@ -26,7 +26,7 @@ function RegisterReciever() {
 
   useEffect(() => {
     if (isError) {
-      toast.error("Failed to add reciever")
+      toast.error("Failed to update reciever")
     }
 
     if (isSuccess ) {
@@ -56,7 +56,7 @@ function RegisterReciever() {
         IDnumber
       }
 
-      dispatch(registerReciever(userData))
+      dispatch(updateReciever(userData))
    
   }
 
@@ -68,9 +68,9 @@ function RegisterReciever() {
     <>
       <section className='heading'>
         <h1>
-          <FaUser /> Reciever
+          <FaUser /> 
         </h1>
-        <p>Add Reciever</p>
+        <p>Update</p>
       </section>
 
       <section className='form'>
@@ -141,4 +141,4 @@ function RegisterReciever() {
   )
 }
 
-export default RegisterReciever
+export default UpdateReciever

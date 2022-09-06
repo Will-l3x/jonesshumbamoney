@@ -26,7 +26,7 @@ function Header() {
         {user ? (
         <>
         
-          <li>  <Link to='/search'>
+          <li>  <Link to='/add'>
                     <ImAidKit/> Add
                 </Link>
           </li>

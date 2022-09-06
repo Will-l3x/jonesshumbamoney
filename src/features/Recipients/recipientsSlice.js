@@ -48,6 +48,24 @@ export const findReciever = createAsyncThunk(
     }
   )
 
+   //find reciver
+export const updateReciever = createAsyncThunk(
+  'recipient/update',
+  async (user, thunkAPI) => {
+    try {
+      return await recipientService.updateReciever(user)
+    } catch (error) {
+      const message =
+        (error.response && 
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
   export const recipientSlice = createSlice({
     name: 'recipient',
     initialState,
@@ -84,6 +102,20 @@ export const findReciever = createAsyncThunk(
           state.user = action.payload
         })
         .addCase(findReciever.rejected, (state, action) => {
+          state.isLoading = false
+          state.isError = true
+          state.message = action.payload
+          state.user = null
+        })
+        .addCase(updateReciever.pending, (state) => {
+          state.isLoading = true
+        })
+        .addCase(updateReciever.fulfilled, (state, action) => {
+          state.isLoading = false
+          state.isSuccess = true
+          state.user = action.payload
+        })
+        .addCase(updateReciever.rejected, (state, action) => {
           state.isLoading = false
           state.isError = true
           state.message = action.payload
